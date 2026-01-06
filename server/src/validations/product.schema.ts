@@ -1,5 +1,5 @@
-
 import { z } from 'zod'
+
 export const productCreateSchema = z.object({
   name: z.string().min(2),
   category: z.string().min(2),
@@ -15,4 +15,4 @@ export const productUpdateSchema = z.object({
   quantity: z.number().int().nonnegative().optional(),
   sku: z.string().min(3).optional(),
   storeId: z.number().int().positive().optional(),
-}).refine((data) => Object.keys(data).length > 0, { message: 'At least one field must be provided.' })
+}).refine(data => Object.keys(data).length > 0, { message: 'At least one field must be provided.' })

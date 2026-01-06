@@ -8,7 +8,7 @@ const prisma = {
   },
   product: {
     findMany: jest.fn(),
-  }
+  },
 }
 
 export default prisma

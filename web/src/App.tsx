@@ -1,7 +1,7 @@
-import { BrowserRouter, Routes, Route, Link, Navigate } from 'react-router-dom'
+import { AppBar, Button, Container, Toolbar, Typography } from '@mui/material'
+import { BrowserRouter, Link, Navigate, Route, Routes } from 'react-router-dom'
 import ProductList from './pages/ProductList'
 import StoreSummary from './pages/StoreSummary'
-import { AppBar, Toolbar, Typography, Button, Container } from '@mui/material'
 
 export default function App() {
   return (

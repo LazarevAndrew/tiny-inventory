@@ -1,8 +1,7 @@
-
+import type { Prisma } from '@prisma/client'
 import prisma from '../db/prisma'
-import { Prisma } from '@prisma/client'
 
-export type ProductFilters = {
+export interface ProductFilters {
   storeId?: number
   category?: string
   minPrice?: number
@@ -17,13 +16,17 @@ export async function listProducts(
   pageSize: number,
   filters: ProductFilters,
   sortBy: keyof Prisma.ProductOrderByWithRelationInput = 'name',
-  sortOrder: 'asc' | 'desc' = 'asc'
+  sortOrder: 'asc' | 'desc' = 'asc',
 ) {
   const where: Prisma.ProductWhereInput = {}
-  if (filters.storeId) where.storeId = filters.storeId
-  if (filters.category) where.category = { equals: filters.category, mode: 'insensitive' as any }
-  if (filters.minPrice || filters.maxPrice) where.price = { gte: filters.minPrice, lte: filters.maxPrice } as any
-  if (filters.minQty || filters.maxQty) where.quantity = { gte: filters.minQty, lte: filters.maxQty }
+  if (filters.storeId)
+    where.storeId = filters.storeId
+  if (filters.category)
+    where.category = { equals: filters.category, mode: 'insensitive' as any }
+  if (filters.minPrice || filters.maxPrice)
+    where.price = { gte: filters.minPrice, lte: filters.maxPrice } as any
+  if (filters.minQty || filters.maxQty)
+    where.quantity = { gte: filters.minQty, lte: filters.maxQty }
   if (filters.search) {
     where.OR = [
       { name: { contains: filters.search, mode: 'insensitive' } },
@@ -48,6 +51,12 @@ export async function getProduct(id: number) {
   return prisma.product.findUnique({ where: { id }, include: { store: true } })
 }
 
-export async function createProduct(data: Prisma.ProductCreateInput) { return prisma.product.create({ data }) }
-export async function updateProduct(id: number, data: Prisma.ProductUpdateInput) { return prisma.product.update({ where: { id }, data }) }
-export async function deleteProduct(id: number) { return prisma.product.delete({ where: { id } }) }
+export async function createProduct(data: Prisma.ProductCreateInput) {
+  return prisma.product.create({ data })
+}
+export async function updateProduct(id: number, data: Prisma.ProductUpdateInput) {
+  return prisma.product.update({ where: { id }, data })
+}
+export async function deleteProduct(id: number) {
+  return prisma.product.delete({ where: { id } })
+}
