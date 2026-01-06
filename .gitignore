@@ -1,0 +1,7 @@
+# Server-specific
+server/node_modules/
+server/dist/
+
+# Web-specific
+web/node_modules/
+web/dist/

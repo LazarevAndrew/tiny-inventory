@@ -1,0 +1,29 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Store {
+  id        Int       @id @default(autoincrement())
+  name      String
+  location  String?
+  products  Product[]
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+}
+
+model Product {
+  id        Int      @id @default(autoincrement())
+  storeId   Int
+  store     Store    @relation(fields: [storeId], references: [id], onDelete: Cascade)
+  name      String
+  category  String
+  price     Decimal  @db.Decimal(10, 2)
+  quantity  Int
+  sku       String   @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
