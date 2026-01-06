@@ -1,6 +1,8 @@
 # Server-specific
 server/node_modules/
 server/dist/
+server/.env
+server/coverage/
 
 # Web-specific
 web/node_modules/

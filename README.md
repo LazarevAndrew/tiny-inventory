@@ -46,6 +46,7 @@ docker compose exec server npm run seed
 
 ## Project Structure
 
+```
 ├── server/
 │   ├── prisma/
 │   │   ├── schema.prisma
@@ -71,6 +72,7 @@ docker compose exec server npm run seed
 │
 ├── docker-compose.yml
 └── README.md
+```
 
 ## Decisions & Trade-offs
 
@@ -81,6 +83,15 @@ docker compose exec server npm run seed
 
 ## If I Had More Time
 
-* Show backend validation and error messages on the UI.
-* Add code coverage
-* Improve storeSummary algorithm for better performance and richer metrics.
+* Polishing the UI, like showing BE validation on item creation, etc .
+* More code coverage :_)
+* Migrate server to ESM
+
+## Run Server test
+
+This repo uses Jest 29 + ts-jest (no Babel)
+
+* Ensure dev deps are installed in server/
+* cp .env.example .env     # provide DATABASE_URL and other envs
+* npx prisma generate
+* npm test
